@@ -25,7 +25,7 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
 - [ ] Configuration:
     - [ ] Custom prompt templates
       
-- [ ] Default tarot reading with celtic cross
+- [X] Default tarot reading with celtic cross
 
 ### 🌐 Phase 1: Web UI (v0.2)
 **Goal**: User-friendly browser access
