@@ -1,16 +1,14 @@
 import random
 import json
 from pathlib import Path
-from core.classCard import Card, tarot_deck
+from .classCard import Card, tarot_deck
 
 filename_json_spreads = 'spreads.json'
 
-folder_CLI = Path(__file__).parent
-folder_project = folder_CLI
+folder_core = Path(__file__).parent
+folder_data = folder_core.parent / "data"
+target_file = folder_data / filename_json_spreads
 
-folder_core = folder_project / "core"
-
-target_file = folder_core / filename_json_spreads
 with open(target_file, 'r') as file:
     json_spreads = json.load(file)
 spreads_list = json_spreads["spreads"]
@@ -51,7 +49,7 @@ def help(spread_id=-1, pyPrint = False):
 
 
 def tell(spreadID=0, useReversed=False, pyPrint = False):
-    result = ""
+    result = []
 
     try:
         spread = next(s for s in spreads_list if s['id'] == spreadID)
@@ -67,24 +65,38 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
             card_id = card_data["id"]
             if card_id not in used_cards:
                 used_cards.append(card_id)
-                reversed_tag = False
-                if useReversed:
-                    reversed_tag = bool(random.getrandbits(1))
+                reversed_tag = bool(random.getrandbits(1)) if useReversed else False
                 card_obj = Card(card_id, reversed_tag)
                 return card_obj
 
-    result += f"\n🔮 Spread: {spread['type']}\n"
-    result += "-" * 30 + "\n"
+    result = []
 
     for i, card_info in enumerate(spread["cards"], 1):
         position = card_info.get("position", f"Position {i}")
         card = takeRandomCard()
-        result += f"{i}. {position}: {card.name} ({'Reversed' if card.ifReversed else 'Upright'})\n"
-        result += f"   Meaning: {', '.join(card.meaning)}\n"
 
-    result += "-" * 30 + "\n"
+        entry = {
+            "question": position,
+            "card": card.name,
+            "ifReversed": card.ifReversed,
+            "meaning": card.meaning
+        }
+
+        result.append(entry)
 
     if pyPrint:
-        print(result)
+        result_text = ""
+        result_text += f"\n🔮 Spread: {spread['type']}\n"
+
+        for fortune in result:
+            result_text += f"{idx}. {fortune['question']}: {fortune['card']} ({orientation})\n"
+            result_text += f"   Meaning: {', '.join(card.meaning)}\n"
+
+        result_text += "-" * 30 + "\n"
+        print(result_text)
 
     return result
+
+
+# help(pyPrint=True)
+# tell(pyPrint=True)

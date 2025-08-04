@@ -4,7 +4,8 @@ from pathlib import Path
 filename_json_cards = 'cards.json'
 
 folder_core = Path(__file__).parent
-target_file = folder_core / filename_json_cards
+folder_data = folder_core.parent / "data"
+target_file = folder_data / filename_json_cards
 
 with open(target_file, 'r') as file:
     json_cards = json.load(file)
