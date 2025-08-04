@@ -1,0 +1,61 @@
+{
+  "spreads": [
+    {
+      "type": "Celtic Cross",
+      "id": 0,
+      "cards": [
+        { "position": "The Present", "card": null },
+        { "position": "The Challenge", "card": null },
+        { "position": "The Past", "card": null },
+        { "position": "The Future", "card": null },
+        { "position": "Above", "card": null },
+        { "position": "Below", "card": null },
+        { "position": "Advice", "card": null },
+        { "position": "External Influences", "card": null },
+        { "position": "Hopes and/or Fears", "card": null },
+        { "position": "Outcome", "card": null }
+      ]
+    },
+    {
+      "type": "Three-Card Spread",
+      "id": 1,
+      "cards": [
+        { "position": "Past", "card": null },
+        { "position": "Present", "card": null },
+        { "position": "Future", "card": null }
+      ]
+    },
+    {
+      "type": "Horseshoe Spread",
+      "id": 2,
+      "cards": [
+        { "position": "Past", "card": null },
+        { "position": "Present", "card": null },
+        { "position": "Future", "card": null },
+        { "position": "Obstacles", "card": null },
+        { "position": "External Influences", "card": null },
+        { "position": "Suggested Approach", "card": null },
+        { "position": "Likely Outcome", "card": null }
+      ]
+    },
+    {
+      "type": "Relationship Spread",
+      "id": 3,
+      "cards": [
+        { "position": "You", "card": null },
+        { "position": "Partner", "card": null },
+        { "position": "Core of the Relationship", "card": null },
+        { "position": "Strengths", "card": null },
+        { "position": "Weaknesses", "card": null },
+        { "position": "Potential Outcome", "card": null }
+      ]
+    },
+    {
+      "type": "One-Card Pull",
+      "id": 4,
+      "cards": [
+        { "position": "Insight", "card": null }
+      ]
+    }
+  ]
+}

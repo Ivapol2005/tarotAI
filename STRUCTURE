@@ -1,0 +1,78 @@
+STRUCTURE: tarotAI Python Package
+=================================
+
+This file describes the folder structure of the `tarotAI` project.
+
+------------------------------------------------------------
+
+Root Directory
+--------------
+
+Contains the project metadata, packaging configuration, and documentation.
+
+Files:
+- .gitignore          → Git exclusions
+- LICENSE             → Project license
+- MANIFEST.in         → Specifies data files to include in the package
+- pyproject.toml      → Modern build configuration for pip
+- setup.py            → Legacy setuptools configuration
+- README.md           → Project description
+- ROADMAP.md          → Future plans and features
+- STRUCTURE           → This file (explaining project structure)
+- config/             → External runtime settings (not part of the package)
+    ├── .env
+    └── settings.toml
+
+------------------------------------------------------------
+
+tarotai/ (Main Python Package)
+------------------------------
+
+This is the actual pip-installable package. Contains all application logic, configs, and data.
+
+Subfolders and files:
+
+- tarotai/
+    ├── __pycache__/           → Python bytecode (ignored)
+    │
+    ├── config/                → Package-level configuration handling
+    │   ├── __init__.py
+    │   ├── loader.py          → Loads and parses settings
+    │   └── settings.toml      → Default package configuration
+    │
+    ├── core/                  → Core logic and domain models
+    │   ├── __init__.py
+    │   ├── classCard.py       → Card class and behavior
+    │   ├── classSpread.py     → Spread class and logic
+    │   ├── interpreter.py     → Logic to interpret a spread of cards
+    │   └── tarotAI_functions.py → Additional helper functions
+    │
+    └── data/                  → Static JSON data bundled with the package
+        ├── __init__.py
+        ├── cards.json         → Card definitions and meanings
+        └── spreads.json       → Spread layouts and descriptions
+
+------------------------------------------------------------
+
+tests/ (Unit Tests)
+-------------------
+
+Contains test scripts to validate core functionality.
+
+Directory:
+- tests/
+    └── test_*.py              → Your test files go here (e.g., test_card.py)
+
+------------------------------------------------------------
+
+Notes
+-----
+
+- `cards.json` and `spreads.json` are included in the final package using `MANIFEST.in`.
+- The `config/` folder outside `tarotai/` is for external runtime use (.env, etc).
+- Python modules follow `snake_case` naming.
+- The project supports both editable (`pip install -e .`) and built installations.
+
+------------------------------------------------------------
+
+End of STRUCTURE
