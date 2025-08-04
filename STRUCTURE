@@ -1,0 +1,21 @@
+tarotAI/                     # Root project directory
+
+├── config/                  # Configuration files
+│   ├── .env                 # Environment variables (API keys, secrets - NEVER commit this!)
+│   └── settings.toml        # User-editable settings (theme, default API choice)
+│
+├── core/                    # Core application logic
+│   ├── __init__.py          # Makes 'core' a Python package
+│   ├── cards.json           # Tarot card database (Rider-Waite deck + meanings)
+│   ├── classCard.py         # Tarot Card class
+│   ├── classSpread.py       # Tarot Spread class (empty yet)
+│   ├── interpreter.py       # AI integration layer (LLM API calls)
+│   └── spreads.json         # Spread definitions (Celtic Cross, 3-Card, etc.)
+│
+├── __init__.py              # Makes root a Python package
+├── CLI.py                   # Command-line interface script
+├── .gitignore               # Git ignore rules
+├── LICENSE                  # MIT License file
+├── README.md                # Project overview and setup instructions
+├── ROADMAP.md               # Development timeline and future plans
+└── STRUCTURE                # This file — project layout documentation
