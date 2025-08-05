@@ -4,57 +4,57 @@
       "type": "Celtic Cross",
       "id": 0,
       "cards": [
-        { "position": "The Present", "card": null },
-        { "position": "The Challenge", "card": null },
-        { "position": "The Past", "card": null },
-        { "position": "The Future", "card": null },
-        { "position": "Above", "card": null },
-        { "position": "Below", "card": null },
-        { "position": "Advice", "card": null },
-        { "position": "External Influences", "card": null },
-        { "position": "Hopes and/or Fears", "card": null },
-        { "position": "Outcome", "card": null }
+        { "id":0, "position": "The Past", "card": null },
+        { "id":1, "position": "The Future", "card": null },
+        { "id":2, "position": "Above", "card": null },
+        { "id":3, "position": "Below", "card": null },
+        { "id":4, "position": "The Present", "card": null },
+        { "id":5, "position": "The Challenge", "card": null },
+        { "id":6, "position": "Advice", "card": null },
+        { "id":7, "position": "External Influences", "card": null },
+        { "id":8, "position": "Hopes and/or Fears", "card": null },
+        { "id":9, "position": "Outcome", "card": null }
       ]
     },
     {
       "type": "Three-Card Spread",
       "id": 1,
       "cards": [
-        { "position": "Past", "card": null },
-        { "position": "Present", "card": null },
-        { "position": "Future", "card": null }
+        { "id":0, "position": "Past", "card": null },
+        { "id":1, "position": "Present", "card": null },
+        { "id":2, "position": "Future", "card": null }
       ]
     },
     {
       "type": "Horseshoe Spread",
       "id": 2,
       "cards": [
-        { "position": "Past", "card": null },
-        { "position": "Present", "card": null },
-        { "position": "Future", "card": null },
-        { "position": "Obstacles", "card": null },
-        { "position": "External Influences", "card": null },
-        { "position": "Suggested Approach", "card": null },
-        { "position": "Likely Outcome", "card": null }
+        { "id":0, "position": "Past", "card": null },
+        { "id":1, "position": "Present", "card": null },
+        { "id":2, "position": "Future", "card": null },
+        { "id":3, "position": "Obstacles", "card": null },
+        { "id":4, "position": "External Influences", "card": null },
+        { "id":5, "position": "Suggested Approach", "card": null },
+        { "id":6, "position": "Likely Outcome", "card": null }
       ]
     },
     {
       "type": "Relationship Spread",
       "id": 3,
       "cards": [
-        { "position": "You", "card": null },
-        { "position": "Partner", "card": null },
-        { "position": "Core of the Relationship", "card": null },
-        { "position": "Strengths", "card": null },
-        { "position": "Weaknesses", "card": null },
-        { "position": "Potential Outcome", "card": null }
+        { "id":0, "position": "You", "card": null },
+        { "id":1, "position": "Partner", "card": null },
+        { "id":2, "position": "Core of the Relationship", "card": null },
+        { "id":3, "position": "Strengths", "card": null },
+        { "id":4, "position": "Weaknesses", "card": null },
+        { "id":5, "position": "Potential Outcome", "card": null }
       ]
     },
     {
       "type": "One-Card Pull",
       "id": 4,
       "cards": [
-        { "position": "Insight", "card": null }
+        { "id":0, "position": "Insight", "card": null }
       ]
     }
   ]
