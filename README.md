@@ -127,7 +127,25 @@ Displays information about available Tarot spreads.
   ```
 
 ## 📜 License
-
 This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 You are free to use, modify, and distribute this software under the terms of the license. Please see the `LICENSE` file for full details.
+
+## Contribution
+[Any help appreciated!!](https://github.com/Ivapol2005/tarotAI/blob/CLI/CONTRIBUTING.md)
+<p>We urgently need assistance in transforming the CLI tool into a web-based GUI:
+ - Web Framework & Hosting
+ - UI/UX Design
+ - Automated Testing with pytest
+
+[Discord server](https://discord.gg/2C6aSMJn)
+
+<a href="https://discord.gg/2C6aSMJn">
+  <img align="left" alt="Discord server" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/discord.svg" />
+</a>
+<a href="https://www.linkedin.com/in/ivan-politykin">
+  <img align="left" alt="My Linkedin" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
+</a>
+<a href="https://github.com/Ivapol2005">
+  <img align="left" alt="My Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
+</a>
