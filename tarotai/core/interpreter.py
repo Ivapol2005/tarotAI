@@ -11,7 +11,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '../../config/.env'))
 
 endpoint = "https://models.github.ai/inference"
 model_name = "meta/Meta-Llama-3.1-8B-Instruct"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["IVAPOL_LLM_API"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
