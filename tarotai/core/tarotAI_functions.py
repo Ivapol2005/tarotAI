@@ -78,4 +78,4 @@ def askAI(spread):
 
 
 # help(pyPrint=True)
-tell(useReversed=True)
+# tell(useReversed=True)
