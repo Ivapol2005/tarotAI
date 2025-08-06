@@ -27,7 +27,7 @@ jobs:
       - name: Create .env file
         run: |
           mkdir -p config
-          echo "IVAPOL_LLM_API=${{ secrets.IVAPOL_LLM_API }}" > config/.env
+          echo "GITHUB_TOKEN=${{ secrets.IVAPOL_LLM_API }}" > config/.env
           echo "USE_REVERSED=True" >> config/.env
 
       - name: Run Python script
