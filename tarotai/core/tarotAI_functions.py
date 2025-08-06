@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from object.classCard import Card, tarot_deck
 from object.classSpread import Spread, spreads_list
+from interpreter import get_tarot_interpretation
 # from interpreter import askAI
 
 
@@ -43,7 +44,6 @@ def help(spread_id=-1, pyPrint = False):
 
 def tell(spreadID=0, useReversed=False, pyPrint = False):
     spread_cur = Spread(spreadID)
-
     used_cards = []
 
     def takeRandomCard():
@@ -58,25 +58,24 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
 
     for i, position_info in enumerate(spread_cur.positions, 1):
         position = position_info.get("position", f"Position {i}")
-
         card = takeRandomCard()
-
-        """
-        entry = {
-            "question": position,
-            "card": card.name,
-            "ifReversed": card.ifReversed,
-            "meaning": card.meaning
-        }
-        """
-
         spread_cur.set_card(position_info, card)
 
     if pyPrint:
         print(spread_cur)
 
+    ifAskAI = True #make changeable in future versions
+    if ifAskAI:
+        askAI(spread_cur)
+
     return spread_cur
 
 
-help(pyPrint=True)
-tell(pyPrint=True)
+def askAI(spread):
+    spread_str = str(spread)
+    result_AI = get_tarot_interpretation(spread_str)
+    print(result_AI)
+
+
+# help(pyPrint=True)
+tell(useReversed=True)

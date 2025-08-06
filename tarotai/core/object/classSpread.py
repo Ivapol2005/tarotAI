@@ -21,8 +21,11 @@ class Spread:
             orientation = "Reversed" if card.ifReversed else "Upright"
             meanings = ", ".join(card.meaning) if isinstance(card.meaning, list) else str(card.meaning)
 
-            result_text += f"{idx}. {position_name}: {card.name} ({orientation})\n"
-            result_text += f"   Meaning: {meanings}\n"
+            result_text += f"{idx}. {position_name}: {card.name}"
+            if card.ifReversed:
+                 result_text += "({orientation})"
+            result_text += "\n"
+            # result_text += f"   Meaning: {meanings}\n"
 
         result_text += "-" * 30 + "\n"
         return result_text

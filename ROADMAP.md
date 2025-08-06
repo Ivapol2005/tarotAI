@@ -17,15 +17,34 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
     def interpret_card(card: str, position: str, question: str = None) -> str:
         # Returns AI-generated interpretation**
     ```
+
+    Text of prompt should look like this:
+    ```Text
+    give pls some advice based on my tarot fortune
+
+    Spread: Celtic Cross
+    ------------------------------
+    1. The Past: King of Wands (Upright)
+    2. The Future: The Star (Upright)
+    3. Above: Nine of Swords (Upright)
+    4. Below: Eight of Cups (Upright)
+    5. The Present: The High Priestess (Upright)
+    6. The Challenge: Ace of Wands (Upright)
+    7. Advice: Four of Pentacles (Upright)
+    8. External Influences: Wheel of Fortune (Upright)
+    9. Hopes and/or Fears: Three of Cups (Upright)
+    10. Outcome: Six of Pentacles (Upright)
+    ```
+
 - [ ] CLI interface:
     ```bash
     $ python tarot.py --card="The Moon" --position=reversed --question="Should I trust this opportunity?"
     ```
 
 - [ ] Configuration:
-    - [ ] Custom prompt templates
-      
-- [ ] Default tarot reading with celtic cross
+    - [X] Custom tarot spreads
+
+- [X] Default tarot reading with celtic cross
 
 ### 🌐 Phase 1: Web UI (v0.2)
 **Goal**: User-friendly browser access
@@ -47,7 +66,7 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
 - [ ] Data consent flow:
       <p> ✅ 	<ins>I agree to share anonymous reading data</ins>
       <p> ✅ 	<ins>Include my birth (natal) chart info	</ins>
-    
+
 - [ ] Research metrics:
     | Metric          | Tracking Method         |
     |-----------------|-------------------------|
