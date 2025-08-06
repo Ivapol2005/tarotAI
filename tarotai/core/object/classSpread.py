@@ -23,7 +23,7 @@ class Spread:
 
             result_text += f"{idx}. {position_name}: {card.name}"
             if card.ifReversed:
-                 result_text += "({orientation})"
+                 result_text += f"({orientation})"
             result_text += "\n"
             # result_text += f"   Meaning: {meanings}\n"
 

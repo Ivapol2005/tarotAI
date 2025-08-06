@@ -27,7 +27,7 @@ You are an expert Tarot reader. Provide:
     1. Concise symbolic interpretation
     2. Practical advice
     3. Psychological insights
-Use 3-5 sentences maximum.
+Use 3-5 sentences maximum. Not forget that some cards may be reversed. Mention them if you see them.
                 """),
                 UserMessage(f"Analyze this spread:\n{spread_description}")
             ],
