@@ -1,17 +1,10 @@
 import random
 import json
 from pathlib import Path
-from .classCard import Card, tarot_deck
-
-filename_json_spreads = 'spreads.json'
-
-folder_core = Path(__file__).parent
-folder_data = folder_core.parent / "data"
-target_file = folder_data / filename_json_spreads
-
-with open(target_file, 'r') as file:
-    json_spreads = json.load(file)
-spreads_list = json_spreads["spreads"]
+from tarotai.core.object.classCard import Card, tarot_deck
+from tarotai.core.object.classSpread import Spread, spreads_list
+from tarotai.core.interpreter import get_tarot_interpretation
+# from interpreter import askAI
 
 
 def help(spread_id=-1, pyPrint = False):
@@ -19,6 +12,7 @@ def help(spread_id=-1, pyPrint = False):
 
     if spread_id == -1:
         result += "🔮 tarotAI Help:\n"
+        result += "-" * 30 + "\n"
         result += "  tell(spreadID=0, useReversed=False) - perform a card spread.\n"
         result += "  spreadID - the index of the spread from the list of spreads.\n"
         result += "  useReversed - True = allow reversed cards, False = no reversed cards.\n"
@@ -49,14 +43,7 @@ def help(spread_id=-1, pyPrint = False):
 
 
 def tell(spreadID=0, useReversed=False, pyPrint = False):
-    result = []
-
-    try:
-        spread = next(s for s in spreads_list if s['id'] == spreadID)
-    except StopIteration:
-        result += f"Error: Spread with id {spreadID} not found.\n"
-        return result
-
+    spread_cur = Spread(spreadID)
     used_cards = []
 
     def takeRandomCard():
@@ -69,34 +56,26 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
                 card_obj = Card(card_id, reversed_tag)
                 return card_obj
 
-    result = []
-
-    for i, card_info in enumerate(spread["cards"], 1):
-        position = card_info.get("position", f"Position {i}")
+    for i, position_info in enumerate(spread_cur.positions, 1):
+        position = position_info.get("position", f"Position {i}")
         card = takeRandomCard()
-
-        entry = {
-            "question": position,
-            "card": card.name,
-            "ifReversed": card.ifReversed,
-            "meaning": card.meaning
-        }
-
-        result.append(entry)
+        spread_cur.set_card(position_info, card)
 
     if pyPrint:
-        result_text = ""
-        result_text += f"\n🔮 Spread: {spread['type']}\n"
+        print(spread_cur)
 
-        for fortune in result:
-            result_text += f"{idx}. {fortune['question']}: {fortune['card']} ({orientation})\n"
-            result_text += f"   Meaning: {', '.join(card.meaning)}\n"
+    ifAskAI = True #make changeable in future versions
+    if ifAskAI:
+        askAI(spread_cur)
 
-        result_text += "-" * 30 + "\n"
-        print(result_text)
+    return spread_cur
 
-    return result
+
+def askAI(spread):
+    spread_str = str(spread)
+    result_AI = get_tarot_interpretation(spread_str)
+    print(result_AI)
 
 
 # help(pyPrint=True)
-# tell(pyPrint=True)
+# tell(useReversed=True)

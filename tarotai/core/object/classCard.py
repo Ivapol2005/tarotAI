@@ -1,15 +1,6 @@
-import json
-from pathlib import Path
+from .loadJSON import load_JSON_data
 
-filename_json_cards = 'cards.json'
-
-folder_core = Path(__file__).parent
-folder_data = folder_core.parent / "data"
-target_file = folder_data / filename_json_cards
-
-with open(target_file, 'r') as file:
-    json_cards = json.load(file)
-tarot_deck= json_cards["cards"]
+tarot_deck= load_JSON_data('cards.json')["cards"]
 
 class Card:
     def __init__(self, id, ifReversed):

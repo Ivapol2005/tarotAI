@@ -42,10 +42,12 @@ Subfolders and files:
     │
     ├── core/                  → Core logic and domain models
     │   ├── __init__.py
-    │   ├── classCard.py       → Card class and behavior
     │   ├── classSpread.py     → Spread class and logic
     │   ├── interpreter.py     → Logic to interpret a spread of cards
-    │   └── tarotAI_functions.py → Additional helper functions
+    │   ├── tarotAI_functions.py → Additional helper functions
+    │   └──object/             → Folder for classes
+    │         ├── classCard.py      → Card class and behavior
+    │         └──interpreter.py     → Logic to interpret a spread of cards
     │
     └── data/                  → Static JSON data bundled with the package
         ├── __init__.py

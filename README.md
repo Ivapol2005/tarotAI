@@ -1,23 +1,55 @@
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+[![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/Ivapol2005)
+[![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/Ivapol2005?tab=repositories)
+
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
+
 # tarotAI
 Open-Source Tarot Readings Powered by LLM
 
 ## Installation
 
-1. Clone the repository:
+To install and run the tarotAI application on your PC, you will need to follow these steps. This guide assumes you have Python and Git installed.
+If not:
+ - install Python (preferably the latest version): https://www.python.org/downloads/
+ - install git: https://git-scm.com/downloads
+
+### 1. Clone the repository:
   ```bash
   git clone https://github.com/Ivapol2005/tarotAI.git
   cd tarotAI
   ```
 
-2. Install dependencies *(aren't any yet)*:
+## Set up
+
+### 1. Set up a Virtual Environment (Recommended)
+It's a good practice to use a virtual environment to manage dependencies for your project.
+  ```bash
+  python -m venv venv
+  ```
+Activate the virtual environment:
+ - On Windows: `venv\Scripts\activate`
+ - On macOS and Linux: `source venv/bin/activate`
+
+### 2. Install Dependencies
+Now, install the required Python packages from the `requirements.txt` file.
   ```bash
   pip install -r requirements.txt
+  pip install -e .
   ```
 
-3. (Optional) Install the package locally:
+### 3. Create a .env File
+The LLM needs a `GITHUB_TOKEN` to function. You'll need to create a `Personal Access Token` on GitHub. No permissions required. [Page about tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+Now, when you have your own token, create a directory named config and a file named .env inside it.
   ```bash
-  pip install .
+  mkdir config
+  echo "GITHUB_TOKEN=your_github_token" > config/.env
+  echo "USE_REVERSED=True" >> config/.env
   ```
+Replace your_github_token with the token you just created.
 
 ## 🧪 Running Tests
 To run all unit tests:
@@ -26,15 +58,18 @@ To run all unit tests:
   ```
 
 ## Usage
-Import the main functions from the tarotai package:
+You can now run the TarotAI application from the command line. The tell() function is likely the entry point.
+  ```bash
+  python -c "from tarotai import tell; tell()"
+  ```
+If you want to explore the functions or run the script in a more interactive way, you can enter the Python shell.
+  ```bash
+  python
+  ```
+Once in the shell (you will see a >>> prompt), type the following:
   ```python
-  from tarotai import tell, help
-
-  # Example usage
-  result = tell("three card spread")
-  print(result)
-
-  help()  # If this function prints usage information
+  >>> from tarotai import tell
+  >>> tell(useReversed=True)
   ```
 
 ### 🔧 `tell()` – Perform a Tarot Spread
@@ -92,7 +127,25 @@ Displays information about available Tarot spreads.
   ```
 
 ## 📜 License
-
 This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 You are free to use, modify, and distribute this software under the terms of the license. Please see the `LICENSE` file for full details.
+
+## Contribution
+[Any help appreciated!!](https://github.com/Ivapol2005/tarotAI/blob/CLI/CONTRIBUTING.md)
+<p>We urgently need assistance in transforming the CLI tool into a web-based GUI:
+ - Web Framework & Hosting
+ - UI/UX Design
+ - Automated Testing with pytest
+
+[Discord server](https://discord.gg/2C6aSMJn)
+
+<a href="https://discord.gg/2C6aSMJn">
+  <img align="left" alt="Discord server" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/discord.svg" />
+</a>
+<a href="https://www.linkedin.com/in/ivan-politykin">
+  <img align="left" alt="My Linkedin" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
+</a>
+<a href="https://github.com/Ivapol2005">
+  <img align="left" alt="My Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
+</a>

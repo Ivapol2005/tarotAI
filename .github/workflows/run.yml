@@ -1,0 +1,38 @@
+name: Run tell() with Secrets
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  execute-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Create .env file
+        run: |
+          mkdir -p config
+          echo "GITHUB_TOKEN=${{ secrets.IVAPOL_LLM_API }}" > config/.env
+          echo "USE_REVERSED=True" >> config/.env
+
+      - name: Run Python script
+        run: |
+          python -c "
+          from tarotai import tell;
+          tell(useReversed=True)
+          "
