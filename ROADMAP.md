@@ -43,7 +43,7 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
 
 - [X] Configuration:
     - [X] Custom tarot spreads
-
+ 
 - [X] Default tarot reading with celtic cross
 
 ### 🌐 Phase 1: Web UI (v0.2)
