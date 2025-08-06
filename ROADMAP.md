@@ -11,8 +11,8 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
 ### ⌨️ Phase 0: Console Mode (MVP)
 **Goal**: Core functionality for programmatic usage
 
-- [ ] First have to choose API (maybe many) to use in program
-- [ ] Implement base interpreter function:
+- [X] First have to choose API (maybe many) to use in program
+- [X] Implement base interpreter function:
     ```python
     def interpret_card(card: str, position: str, question: str = None) -> str:
         # Returns AI-generated interpretation**
@@ -36,12 +36,12 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
     10. Outcome: Six of Pentacles (Upright)
     ```
 
-- [ ] CLI interface:
+- [X] CLI interface:
     ```bash
-    $ python tarot.py --card="The Moon" --position=reversed --question="Should I trust this opportunity?"
+    $ python -c "tell(useReversed=True)"
     ```
 
-- [ ] Configuration:
+- [X] Configuration:
     - [X] Custom tarot spreads
 
 - [X] Default tarot reading with celtic cross

@@ -3,21 +3,45 @@ Open-Source Tarot Readings Powered by LLM
 
 ## Installation
 
-1. Clone the repository:
+To install and run the tarotAI application on your PC, you will need to follow these steps. This guide assumes you have Python and Git installed.
+If not:
+ - install Python (preferably the latest version): https://www.python.org/downloads/
+ - install git: https://git-scm.com/downloads
+
+### 1. Clone the repository:
   ```bash
   git clone https://github.com/Ivapol2005/tarotAI.git
   cd tarotAI
   ```
 
-2. Install dependencies *(aren't any yet)*:
+## Set up
+
+### 1. Set up a Virtual Environment (Recommended)
+It's a good practice to use a virtual environment to manage dependencies for your project.
+  ```bash
+  python -m venv venv
+  ```
+Activate the virtual environment:
+ - On Windows: `venv\Scripts\activate`
+ - On macOS and Linux: `source venv/bin/activate`
+
+### 2. Install Dependencies
+Now, install the required Python packages from the `requirements.txt` file.
   ```bash
   pip install -r requirements.txt
+  pip install -e .
   ```
 
-3. (Optional) Install the package locally:
+### 3. Create a .env File
+The LLM needs a `GITHUB_TOKEN` to function. You'll need to create a `Personal Access Token` on GitHub. No permissions required. [Page about tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+Now, when you have your own token, create a directory named config and a file named .env inside it.
   ```bash
-  pip install .
+  mkdir config
+  echo "GITHUB_TOKEN=your_github_token" > config/.env
+  echo "USE_REVERSED=True" >> config/.env
   ```
+Replace your_github_token with the token you just created.
 
 ## 🧪 Running Tests
 To run all unit tests:
@@ -26,15 +50,18 @@ To run all unit tests:
   ```
 
 ## Usage
-Import the main functions from the tarotai package:
+You can now run the TarotAI application from the command line. The tell() function is likely the entry point.
+  ```bash
+  python -c "from tarotai import tell; tell()"
+  ```
+If you want to explore the functions or run the script in a more interactive way, you can enter the Python shell.
+  ```bash
+  python
+  ```
+Once in the shell (you will see a >>> prompt), type the following:
   ```python
-  from tarotai import tell, help
-
-  # Example usage
-  result = tell("three card spread")
-  print(result)
-
-  help()  # If this function prints usage information
+  >>> from tarotai import tell
+  >>> tell(useReversed=True)
   ```
 
 ### 🔧 `tell()` – Perform a Tarot Spread
