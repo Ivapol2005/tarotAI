@@ -1,9 +1,9 @@
 import random
 import json
 from pathlib import Path
-from object.classCard import Card, tarot_deck
-from object.classSpread import Spread, spreads_list
-from interpreter import get_tarot_interpretation
+from tarotai.core.object.classCard import Card, tarot_deck
+from tarotai.core.object.classSpread import Spread, spreads_list
+from tarotai.core.interpreter import get_tarot_interpretation
 # from interpreter import askAI
 
 
