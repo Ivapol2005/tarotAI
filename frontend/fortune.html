@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Your Fortune</title>
+</head>
+<body>
+
+  <h1>Choose a Spread</h1>
+
+  <p>Select one of the options below:</p>
+
+  <form onsubmit="event.preventDefault(); getFortune();">
+    <select id="spreadSelect">
+      <option disabled selected>Loading...</option>
+    </select>
+
+    <button type="submit">Get Fortune</button>
+    <button id="aiButton" type="button" onclick="getAIHelp()" style="display: none;">AI help</button>
+
+    <div id="fortune"></div>
+    <div id="ai"></div>
+  </form>
+
+  <!--button id="aiButton" style="display:none;" type="button" onclick="getAIHelp()">AI help</button-->
+
+  <script>
+    let spreads = [];
+    let lastFortune = "";
+
+    // load from json
+    fetch('../tarotai/data/spreads.json')
+      .then(response => response.json())
+      .then(data => {
+        spreads = data.spreads;
+        const select = document.getElementById('spreadSelect');
+        select.innerHTML = '';
+        spreads.forEach(spread => {
+          const option = document.createElement('option');
+          option.value = spread.id;
+          option.textContent = spread.type;
+          select.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading spreads:', error);
+        document.getElementById('spreadSelect').innerHTML = '<option disabled>Error</option>';
+      });
+
+    // get trot spread
+    function getFortune() {
+      const select = document.getElementById('spreadSelect');
+      const selectedId = parseInt(select.value);
+
+      fetch('http://127.0.0.1:5000/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spreadID: selectedId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('fortune').innerText = data.spread;
+        document.getElementById('ai').innerText = "";
+
+        lastFortune = data.spread;  // Зберігаємо текст розкладу
+
+        if (lastFortune && lastFortune.trim() !== "") {
+          document.getElementById('aiButton').style.display = "inline";
+        } else {
+          document.getElementById('aiButton').style.display = "none";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('fortune').innerText = 'Error getting fortune.';
+        document.getElementById('aiButton').style.display = "none";
+      });
+    }
+
+
+    // Отримати AI інтерпретацію
+    function getAIHelp() {
+        if (!lastFortune) return;
+
+        fetch('http://127.0.0.1:5000/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ spreadText: lastFortune })  // передаємо текст розкладу
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('ai').innerText = data.ai;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('ai').innerText = 'Error getting AI help.';
+        });
+      }
+  </script>
+
+</body>
+</html>
