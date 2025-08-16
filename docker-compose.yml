@@ -1,12 +1,12 @@
 version: '3.9'
 
 services:
-  node-app:
-    build: ./node
+  tarotai:
+    build: .
     ports:
-      - "3000:3000"
-    restart: always
-
-  python-app:
-    build: ./python
+      - "8000:8000"  # змінити під порт, який використовує app.py
+    volumes:
+      - .:/app
+    env_file:
+      - config/.env
     restart: always
