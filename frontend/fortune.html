@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Choose Your Fortune</title>
+  <title>Your Fortune</title>
+  <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
 
@@ -19,7 +20,8 @@
     <button id="aiButton" type="button" onclick="getAIHelp()" style="display: none;">AI help</button>
 
     <div id="fortune"></div>
-    <div id="ai"></div>
+    <hr/>
+    <div id="ai" style="white-space: pre-wrap;"></div>
   </form>
 
   <!--button id="aiButton" style="display:none;" type="button" onclick="getAIHelp()">AI help</button-->
@@ -59,10 +61,23 @@
       })
       .then(response => response.json())
       .then(data => {
-        document.getElementById('fortune').innerText = data.spread;
+        const lines = data.spread.split('\n'); // розбиваємо на рядки
+        const fortuneEl = document.getElementById('fortune');
+        fortuneEl.innerText = "";
         document.getElementById('ai').innerText = "";
+        let i = 0;
 
-        lastFortune = data.spread;  // Зберігаємо текст розкладу
+        function printLine() {
+          if (i < lines.length) {
+            fortuneEl.innerText += lines[i] + '\n';
+            i++;
+            setTimeout(printLine, 100);
+          }
+        }
+
+        printLine();
+
+        lastFortune = data.spread;
 
         if (lastFortune && lastFortune.trim() !== "") {
           document.getElementById('aiButton').style.display = "inline";
@@ -77,26 +92,49 @@
       });
     }
 
-
-    // Отримати AI інтерпретацію
     function getAIHelp() {
-        if (!lastFortune) return;
+      if (!lastFortune) return;
 
-        fetch('http://127.0.0.1:5000/ai', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ spreadText: lastFortune })  // передаємо текст розкладу
-        })
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('ai').innerText = data.ai;
-        })
-        .catch(err => {
-          console.error(err);
-          document.getElementById('ai').innerText = 'Error getting AI help.';
-        });
-      }
+      // Дезактивуємо кнопку перед початком виконання функції
+      const aiButton = document.getElementById('aiButton');
+      aiButton.disabled = true; // робимо кнопку неактивною
+      aiButton.style.opacity = 0.5; // зменшуємо прозорість, щоб показати, що вона неактивна
+
+      fetch('http://127.0.0.1:5000/ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spreadText: lastFortune })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const aiEl = document.getElementById('ai');
+        aiEl.innerHTML = "";  // Очистити попередній текст
+        const text = data.ai;
+        let i = 0;
+
+        function typeChar() {
+          if (i < text.length) {
+            const char = text[i] === " " ? "&nbsp;" : (text[i] === "\n" ? "<br />" : text[i]);
+            aiEl.innerHTML += char;
+            i++;
+            setTimeout(typeChar, 10);
+          }
+        }
+
+        typeChar();
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('ai').innerText = 'Error getting AI help.';
+      })
+      .finally(() => {
+        // Відновлюємо кнопку після завершення роботи функції
+        aiButton.disabled = false;
+        aiButton.style.opacity = 1; // Відновлюємо нормальну прозорість
+      });
+    }
   </script>
+
 
 </body>
 </html>

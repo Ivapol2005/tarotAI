@@ -1,0 +1,194 @@
+/*style.css*/
+
+/* EGA Palette Base Colors */
+:root {
+  --ega-black: #000000;
+  --ega-white: #FEFEFE;
+  --ega-blue: #0000A8;
+  --ega-green: #00A800;
+  --ega-cyan: #00A8A8;
+  --ega-red: #A80000;
+  --ega-magenta: #A800A8;
+  --ega-orange: #A85400;
+  --ega-grey: #A8A8A8;
+  --ega-darkgrey: #545454;
+  --ega-lightblue: #5454FE;
+  --ega-lightgreen: #54FE54;
+  --ega-lightcyan: #54FEFE;
+  --ega-brightred: #FE5454;
+  --ega-brightmagenta: #FE54FE;
+  --ega-yellow: #FEFE54;
+}
+
+/* Base body style */
+body {
+  background-color: var(--ega-black);
+  color: var(--ega-white);
+  font-family: monospace, monospace; /* Retro terminal vibe */
+  margin: 0;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+/* Headings with white border underline */
+h1, h2, h3 {
+  border-bottom: 1px solid var(--ega-white);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+/* Buttons with white border and white text on black */
+button {
+  background-color: var(--ega-black);
+  color: var(--ega-white);
+  border: 1px solid var(--ega-white);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  /* no border-radius */
+}
+
+/* Button container */
+div[align="center"] > form > button {
+  width: 180px; /* fixed width for all buttons in that div */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Links in white with underline on hover */
+a {
+  color: var(--ega-cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  // transition: border-bottom-color 0.3s;
+}
+
+a:hover, a:focus {
+  border-bottom-color: var(--ega-white);
+  outline: none;
+}
+
+/* Inputs with white border and black background */
+input, textarea, select {
+  background-color: var(--ega-black);
+  color: var(--ega-white);
+  border: 1px solid var(--ega-white);
+  padding: 0.4rem 0.6rem;
+  font-family: monospace, monospace;
+  /* no border-radius */
+}
+
+/* Table with white borders */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  color: var(--ega-white);
+}
+
+th, td {
+  border: 1px solid var(--ega-white);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+/* Simple horizontal rule line */
+hr {
+  border: none;
+  border-top: 1px solid var(--ega-white);
+  margin: 2rem 0;
+}
+
+select {
+  background-color: var(--ega-black);
+  color: var(--ega-white);
+  border: 1px solid var(--ega-white);
+  padding: 0.4rem 0.6rem;
+  font-family: monospace, monospace;
+  cursor: pointer;
+  /* no border-radius */
+  // transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+}
+
+/* Hover effect */
+select:hover {
+  border-color: var(--ega-yellow);
+  color: var(--ega-yellow);
+  background-color: var(--ega-darkgrey);
+}
+
+button:hover {
+  border-color: var(--ega-yellow);
+  color: var(--ega-yellow);
+  background-color: var(--ega-darkgrey);
+}
+
+/* Focus effect (when keyboard/tab focused) */
+select:focus {
+  outline: none; /* remove default focus outline */
+  border-color: var(--ega-lightblue);
+  color: var(--ega-lightblue);
+  background-color: var(--ega-darkgrey);
+}
+
+button:focus {
+  outline: none; /* remove default focus outline */
+  border-color: var(--ega-lightblue);
+  color: var(--ega-lightblue);
+  background-color: var(--ega-darkgrey);
+}
+
+/* Clicked/Active effect for buttons */
+button:active {
+  border-color: var(--ega-brightred);
+  color: var(--ega-brightred);
+  background-color: var(--ega-black);
+  /* Keep sharp edges, no border-radius */
+}
+
+/* Clicked/Active effect for select (while clicked) */
+select:active {
+  border-color: var(--ega-brightred);
+  color: var(--ega-brightred);
+  background-color: var(--ega-black);
+}
+
+
+/*main menu logo*/
+#logo {
+  // font-family: monospace;
+  // white-space: pre;
+  line-height: 1.2;
+}
+
+/* Style for each letter */
+#logo .T {
+  color: var(--ega-lightblue);
+}
+
+#logo .A {
+  color: var(--ega-lightgreen);
+}
+
+#logo .R {
+  color: var(--ega-brightred);
+}
+
+#logo .O {
+  color: var(--ega-yellow);
+}
+
+#logo .I {
+  color: var(--ega-lightcyan);
+}
+
+#logo .T:hover,
+#logo .A:hover,
+#logo .R:hover,
+#logo .O:hover,
+#logo .I:hover {
+  text-shadow: 0 0 5px #fff;
+  transform: scale(1.05);
+}

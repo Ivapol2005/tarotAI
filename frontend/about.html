@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>README</title>
+<link rel="stylesheet" href="style/style.css" />
+</head>
+<body><p><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" referrerpolicy="no-referrer" alt="Open Source Love">
+<a href='https://github.com/Ivapol2005'><img src="https://img.shields.io/badge/View-My_Profile-green?logo=GitHub" referrerpolicy="no-referrer" alt="View My Profile"></a>
+<a href='https://github.com/Ivapol2005?tab=repositories'><img src="https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub" referrerpolicy="no-referrer" alt="View Repositories"></a></p>
+<p><a href='https://forthebadge.com'><img src="https://forthebadge.com/images/badges/made-with-python.svg" referrerpolicy="no-referrer" alt="forthebadge"></a>
+<a href='https://forthebadge.com'><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" referrerpolicy="no-referrer" alt="forthebadge"></a></p>
+<h1 id='tarotai'>tarotAI</h1>
+<p>Open-Source Tarot Readings Powered by LLM</p>
+<h2 id='installation'>Installation</h2>
+<p>To install and run the tarotAI application on your PC, you will need to follow these steps. This guide assumes you have Python and Git installed.
+If not:</p>
+<ul>
+<li>install Python (preferably the latest version): <a href='https://www.python.org/downloads/' target='_blank' class='url'>https://www.python.org/downloads/</a></li>
+<li>install git: <a href='https://git-scm.com/downloads' target='_blank' class='url'>https://git-scm.com/downloads</a></li>
+
+</ul>
+<h3 id='1-clone-the-repository'>1. Clone the repository:</h3>
+<pre><code class='language-shell' lang='shell'>git clone https://github.com/Ivapol2005/tarotAI.git
+cd tarotAI
+</code></pre>
+<h2 id='set-up'>Set up</h2>
+<h3 id='1-set-up-a-virtual-environment-recommended'>1. Set up a Virtual Environment (Recommended)</h3>
+<p>It&#39;s a good practice to use a virtual environment to manage dependencies for your project.</p>
+<pre><code class='language-shell' lang='shell'>python -m venv venv
+</code></pre>
+<p>Activate the virtual environment:</p>
+<ul>
+<li>On Windows: <code>venv\Scripts\activate</code></li>
+<li>On macOS and Linux: <code>source venv/bin/activate</code></li>
+
+</ul>
+<h3 id='2-install-dependencies'>2. Install Dependencies</h3>
+<p>Now, install the required Python packages from the <code>requirements.txt</code> file.</p>
+<pre><code class='language-shell' lang='shell'>pip install -r requirements.txt
+pip install -e .
+</code></pre>
+<h3 id='3-create-a-env-file'>3. Create a .env File</h3>
+<p>The LLM needs a <code>GITHUB_TOKEN</code> to function. You&#39;ll need to create a <code>Personal Access Token</code> on GitHub. No permissions required. <a href='https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens'>Page about tokens</a></p>
+<p>Now, when you have your own token, create a directory named config and a file named .env inside it.</p>
+<pre><code class='language-shell' lang='shell'>mkdir config
+echo &quot;GITHUB_TOKEN=your_github_token&quot; &gt; config/.env
+echo &quot;USE_REVERSED=True&quot; &gt;&gt; config/.env
+</code></pre>
+<p>Replace your_github_token with the token you just created.</p>
+<h2 id='🧪-running-tests'>🧪 Running Tests</h2>
+<p>To run all unit tests:</p>
+<pre><code class='language-shell' lang='shell'>  python3 -m pytest tests/
+</code></pre>
+<h2 id='usage'>Usage</h2>
+<p>You can now run the TarotAI application from the command line. The tell() function is likely the entry point.</p>
+<pre><code class='language-shell' lang='shell'>python -c &quot;from tarotai import tell; tell()&quot;
+</code></pre>
+<p>If you want to explore the functions or run the script in a more interactive way, you can enter the Python shell.</p>
+<pre><code class='language-shell' lang='shell'>python
+</code></pre>
+<p>Once in the shell (you will see a &gt;&gt;&gt; prompt), type the following:</p>
+<pre><code class='language-python' lang='python'>&gt;&gt;&gt; from tarotai import tell
+&gt;&gt;&gt; tell(useReversed=True)
+</code></pre>
+<h3 id='🔧-tell----perform-a-tarot-spread'>🔧 <code>tell()</code> – Perform a Tarot Spread</h3>
+<p>  <code>tell(spreadID=0, useReversed=False, pyPrint=False)</code>
+Performs a Tarot card spread using one of the predefined layouts.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>spreadID</code> (int): Index of the spread from the list (see <code>help()</code> for available options).</li>
+<li><code>useReversed</code> (bool): If <code>True</code>, cards can be drawn reversed; if <code>False</code>, all cards are upright.</li>
+<li><code>pyPrint</code> (bool): If <code>True</code>, prints the result to console; otherwise, returns it as a string.</li>
+
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class='language-python' lang='python'>  from tarotai import tell
+
+  # Perform a 3-card reading with reversed cards allowed
+  reading = tell(spreadID=0, useReversed=True)
+  print(reading)
+</code></pre>
+<p><strong>Returns:</strong>
+A list of dictionaries, each representing a card in the spread:</p>
+<pre><code class='language-python' lang='python'>[
+  {
+    &quot;question&quot;: &quot;Past&quot;,
+    &quot;card&quot;: &quot;The Fool&quot;,
+    &quot;ifReversed&quot;: False,
+    &quot;meaning&quot;: [&quot;New beginnings&quot;, &quot;Adventure&quot;, &quot;Innocence&quot;]
+  },
+  ...
+]
+</code></pre>
+<h3 id='🗂️-help----get-spread-info'>🗂️ <code>help()</code> – Get Spread Info</h3>
+<p>  <code>help(spread_id=-1, pyPrint=False)</code></p>
+<p>Displays information about available Tarot spreads.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>spread_id</code> (int): ID of a specific spread to inspect. Use <code>-1</code> (default) to list all available spreads.</li>
+<li><code>pyPrint</code> (bool): If <code>True</code>, prints the result to console; otherwise, returns it as a string.</li>
+
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class='language-python' lang='python'>  from tarotai import help
+
+  # List all available spreads
+  print(help())
+
+  # View details of spread with ID 0
+  print(help(0))
+</code></pre>
+<h2 id='📜-license'>📜 License</h2>
+<p>This project is licensed under the <a href='https://www.apache.org/licenses/LICENSE-2.0'>Apache License 2.0</a>.</p>
+<p>You are free to use, modify, and distribute this software under the terms of the license. Please see the <code>LICENSE</code> file for full details.</p>
+<h2 id='contribution'>Contribution</h2>
+<p><a href='https://github.com/Ivapol2005/tarotAI/blob/CLI/CONTRIBUTING.md'>Any help appreciated!!</a></p>
+<p>We urgently need assistance in transforming the CLI tool into a web-based GUI:
+ - Web Framework & Hosting
+ - UI/UX Design
+ - Automated Testing with pytest
+
+<div>
+    <p><a href='https://discord.gg/2C6aSMJn'>Discord server</a>
+    <a href='https://teamchallenge.io/team/4150#ourProject'>Team challenge</a></p>
+    <p><a href="https://discord.gg/2C6aSMJn">
+      <img align="left" alt="Discord server" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/discord.svg" />
+    </a>
+    <a href="https://www.linkedin.com/in/ivan-politykin">
+      <img align="left" alt="My Linkedin" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
+    </a>
+    <a href="https://github.com/Ivapol2005">
+      <img align="left" alt="My Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
+    </a></p>
+</div>
+</body>
+</html>
