@@ -139,6 +139,7 @@ You are free to use, modify, and distribute this software under the terms of the
  - Automated Testing with pytest
 
 [Discord server](https://discord.gg/2C6aSMJn)
+[Team challenge](https://teamchallenge.io/team/4150#ourProject)
 
 <a href="https://discord.gg/2C6aSMJn">
   <img align="left" alt="Discord server" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/discord.svg" />

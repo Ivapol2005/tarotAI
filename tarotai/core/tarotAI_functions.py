@@ -64,9 +64,20 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
     if pyPrint:
         print(spread_cur)
 
+    """
+    ai_powered = ""
     ifAskAI = True #make changeable in future versions
     if ifAskAI:
-        askAI(spread_cur)
+        ai_powered = askAI(spread_cur)
+
+    result = []
+    result.append(spread_cur)
+
+    if ai_powered:
+        result.append(ai_powered)
+    else:
+        result.append("")
+    """
 
     return spread_cur
 
@@ -74,7 +85,8 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
 def askAI(spread):
     spread_str = str(spread)
     result_AI = get_tarot_interpretation(spread_str)
-    print(result_AI)
+    # print(result_AI)
+    return result_AI
 
 
 # help(pyPrint=True)
