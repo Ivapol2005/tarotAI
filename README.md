@@ -6,6 +6,8 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
 
+http://209.38.254.164:8000/frontend/fortune.html?
+
 # tarotAI
 Open-Source Tarot Readings Powered by LLM
 
