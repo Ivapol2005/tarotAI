@@ -16,12 +16,12 @@
       <option disabled selected>Loading...</option>
     </select>
 
-    <button type="submit">Get Fortune</button>
+    <button id="getFortuneButton" type="submit">Get Fortune</button>
     <button id="aiButton" type="button" onclick="getAIHelp()" style="display: none;">AI help</button>
 
     <div id="fortune"></div>
     <hr/>
-    <div id="ai" style="white-space: pre-wrap;"></div>
+    <div id="ai" style="white-space: normal; overflow-wrap: break-word; word-break: normal; max-width: 100%;"></div>
   </form>
 
   <!--button id="aiButton" style="display:none;" type="button" onclick="getAIHelp()">AI help</button-->
@@ -43,6 +43,10 @@
           option.textContent = spread.type;
           select.appendChild(option);
         });
+        const defaultOption = spreads.find(spread => spread.id === 0);
+        if (defaultOption) {
+          select.value = defaultOption.id;
+        }
       })
       .catch(error => {
         console.error('Error loading spreads:', error);
@@ -51,10 +55,13 @@
 
     // get trot spread
     function getFortune() {
+      getFortuneButton.disabled = true;
+      getFortuneButton.style.opacity = 0.5;
+
       const select = document.getElementById('spreadSelect');
       const selectedId = parseInt(select.value);
 
-      fetch('http://127.0.0.1:5000/run', {
+      fetch('http://127.0.0.1:5000/run', { // http://209.38.254.164:5000/run
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spreadID: selectedId })
@@ -72,6 +79,10 @@
             fortuneEl.innerText += lines[i] + '\n';
             i++;
             setTimeout(printLine, 100);
+          } else {
+            // Коли друк завершився – робимо кнопку активною
+            getFortuneButton.disabled = false;
+            getFortuneButton.style.opacity = 1;
           }
         }
 
@@ -100,7 +111,7 @@
       aiButton.disabled = true; // робимо кнопку неактивною
       aiButton.style.opacity = 0.5; // зменшуємо прозорість, щоб показати, що вона неактивна
 
-      fetch('http://127.0.0.1:5000/ai', {
+      fetch('http://127.0.0.1:5000/ai', { //http://209.38.254.164:5000/ai
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spreadText: lastFortune })
@@ -118,19 +129,17 @@
             aiEl.innerHTML += char;
             i++;
             setTimeout(typeChar, 10);
+          } else {
+            // Коли друк завершився – робимо кнопку активною
+            aiButton.disabled = false;
+            aiButton.style.opacity = 1;
           }
         }
-
         typeChar();
       })
       .catch(err => {
         console.error(err);
         document.getElementById('ai').innerText = 'Error getting AI help.';
-      })
-      .finally(() => {
-        // Відновлюємо кнопку після завершення роботи функції
-        aiButton.disabled = false;
-        aiButton.style.opacity = 1; // Відновлюємо нормальну прозорість
       });
     }
   </script>

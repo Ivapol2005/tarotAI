@@ -42,9 +42,12 @@ def help(spread_id=-1, pyPrint = False):
     return result
 
 
-def tell(spreadID=0, useReversed=False, pyPrint = False):
+def tell(spreadID=0, useReversed=False, pyPrint = False, customText=""):
     spread_cur = Spread(spreadID)
     used_cards = []
+
+    if spreadID == -1:
+        spread_cur.set_position_name(0, customText)
 
     def takeRandomCard():
         while True:
@@ -63,21 +66,6 @@ def tell(spreadID=0, useReversed=False, pyPrint = False):
 
     if pyPrint:
         print(spread_cur)
-
-    """
-    ai_powered = ""
-    ifAskAI = True #make changeable in future versions
-    if ifAskAI:
-        ai_powered = askAI(spread_cur)
-
-    result = []
-    result.append(spread_cur)
-
-    if ai_powered:
-        result.append(ai_powered)
-    else:
-        result.append("")
-    """
 
     return spread_cur
 

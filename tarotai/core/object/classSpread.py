@@ -48,3 +48,10 @@ class Spread:
                 # print(self)
                 return
         raise PositionNotFoundError(f"Position with such id not found {position}")
+
+    def set_position_name(self, position_id, new_name):
+        for pos in self.positions:
+            if pos["id"] == position_id:
+                pos["position"] = new_name
+                return
+        raise PositionNotFoundError(f"Position with id {position_id} not found")
