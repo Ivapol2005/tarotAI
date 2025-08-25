@@ -1,9 +1,11 @@
+<!--fortune.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Your Fortune</title>
   <link rel="stylesheet" href="style/style.css" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
 
@@ -12,12 +14,17 @@
   <p>Select one of the options below:</p>
 
   <form onsubmit="event.preventDefault(); getFortune();">
-    <select id="spreadSelect">
+    <select id="spreadSelect" onchange="checkSpreadSelection()">
       <option disabled selected>Loading...</option>
     </select>
 
     <button id="getFortuneButton" type="submit">Get Fortune</button>
     <button id="aiButton" type="button" onclick="getAIHelp()" style="display: none;">AI help</button>
+
+    <div id="customText" style="display: none;">
+      <label for="customTextInput">Enter your custom text:</label>
+      <textarea id="customTextInput" rows="4" cols="50"></textarea>
+    </div>
 
     <div id="fortune"></div>
     <hr/>
@@ -61,14 +68,21 @@
       const select = document.getElementById('spreadSelect');
       const selectedId = parseInt(select.value);
 
-      fetch('http://127.0.0.1:5000/run', { // http://209.38.254.164:5000/run
+      let requestBody = { spreadID: selectedId };
+
+      if (selectedId === -1) {
+        const customText = document.getElementById('customTextInput').value;
+        requestBody.customText = customText;
+      }
+
+      fetch('http://209.38.254.164:5000/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spreadID: selectedId })
+        body: JSON.stringify(requestBody)
       })
       .then(response => response.json())
       .then(data => {
-        const lines = data.spread.split('\n'); // розбиваємо на рядки
+        const lines = data.spread.split('\n');
         const fortuneEl = document.getElementById('fortune');
         fortuneEl.innerText = "";
         document.getElementById('ai').innerText = "";
@@ -80,7 +94,6 @@
             i++;
             setTimeout(printLine, 100);
           } else {
-            // Коли друк завершився – робимо кнопку активною
             getFortuneButton.disabled = false;
             getFortuneButton.style.opacity = 1;
           }
@@ -106,12 +119,11 @@
     function getAIHelp() {
       if (!lastFortune) return;
 
-      // Дезактивуємо кнопку перед початком виконання функції
       const aiButton = document.getElementById('aiButton');
-      aiButton.disabled = true; // робимо кнопку неактивною
-      aiButton.style.opacity = 0.5; // зменшуємо прозорість, щоб показати, що вона неактивна
+      aiButton.disabled = true;
+      aiButton.style.opacity = 0.5;
 
-      fetch('http://127.0.0.1:5000/ai', { //http://209.38.254.164:5000/ai
+      fetch('http://209.38.254.164:5000/ai', { //http://209.38.254.164:5000/ai
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spreadText: lastFortune })
@@ -119,7 +131,7 @@
       .then(response => response.json())
       .then(data => {
         const aiEl = document.getElementById('ai');
-        aiEl.innerHTML = "";  // Очистити попередній текст
+        aiEl.innerHTML = "";
         const text = data.ai;
         let i = 0;
 
@@ -130,7 +142,6 @@
             i++;
             setTimeout(typeChar, 10);
           } else {
-            // Коли друк завершився – робимо кнопку активною
             aiButton.disabled = false;
             aiButton.style.opacity = 1;
           }
@@ -141,6 +152,18 @@
         console.error(err);
         document.getElementById('ai').innerText = 'Error getting AI help.';
       });
+    }
+
+    function checkSpreadSelection() {
+      const select = document.getElementById('spreadSelect');
+      const selectedId = parseInt(select.value);
+      const customTextDiv = document.getElementById('customText');
+
+      if (selectedId === -1) {
+        customTextDiv.style.display = 'block';
+      } else {
+        customTextDiv.style.display = 'none';
+      }
     }
   </script>
 
