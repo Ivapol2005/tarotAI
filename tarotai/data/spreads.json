@@ -1,6 +1,13 @@
 {
   "spreads": [
     {
+      "type": "Your Question",
+      "id": -1,
+      "cards": [
+        { "id":0, "position": "", "card": null }
+      ]
+    },
+    {
       "type": "Celtic Cross",
       "id": 0,
       "cards": [

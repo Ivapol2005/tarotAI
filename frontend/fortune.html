@@ -1,8 +1,11 @@
+<!--fortune.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Choose Your Fortune</title>
+  <title>Your Fortune</title>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
 
@@ -11,15 +14,21 @@
   <p>Select one of the options below:</p>
 
   <form onsubmit="event.preventDefault(); getFortune();">
-    <select id="spreadSelect">
+    <select id="spreadSelect" onchange="checkSpreadSelection()">
       <option disabled selected>Loading...</option>
     </select>
 
-    <button type="submit">Get Fortune</button>
+    <button id="getFortuneButton" type="submit">Get Fortune</button>
     <button id="aiButton" type="button" onclick="getAIHelp()" style="display: none;">AI help</button>
 
+    <div id="customText" style="display: none;">
+      <label for="customTextInput">Enter your custom text:</label>
+      <textarea id="customTextInput" rows="4" cols="50"></textarea>
+    </div>
+
     <div id="fortune"></div>
-    <div id="ai"></div>
+    <hr/>
+    <div id="ai" style="white-space: normal; overflow-wrap: break-word; word-break: normal; max-width: 100%;"></div>
   </form>
 
   <!--button id="aiButton" style="display:none;" type="button" onclick="getAIHelp()">AI help</button-->
@@ -41,6 +50,10 @@
           option.textContent = spread.type;
           select.appendChild(option);
         });
+        const defaultOption = spreads.find(spread => spread.id === 0);
+        if (defaultOption) {
+          select.value = defaultOption.id;
+        }
       })
       .catch(error => {
         console.error('Error loading spreads:', error);
@@ -49,20 +62,46 @@
 
     // get trot spread
     function getFortune() {
+      getFortuneButton.disabled = true;
+      getFortuneButton.style.opacity = 0.5;
+
       const select = document.getElementById('spreadSelect');
       const selectedId = parseInt(select.value);
 
-      fetch('http://127.0.0.1:5000/run', {
+      let requestBody = { spreadID: selectedId };
+
+      if (selectedId === -1) {
+        const customText = document.getElementById('customTextInput').value;
+        requestBody.customText = customText;
+      }
+
+      fetch('http://209.38.254.164:5000/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spreadID: selectedId })
+        body: JSON.stringify(requestBody)
       })
       .then(response => response.json())
       .then(data => {
-        document.getElementById('fortune').innerText = data.spread;
+        const lines = data.spread.split('\n');
+        const fortuneEl = document.getElementById('fortune');
+        fortuneEl.innerText = "";
         document.getElementById('ai').innerText = "";
+        let i = 0;
 
-        lastFortune = data.spread;  // Зберігаємо текст розкладу
+        function printLine() {
+          if (i < lines.length) {
+            fortuneEl.innerText += lines[i] + '\n';
+            i++;
+            setTimeout(printLine, 100);
+          } else {
+            getFortuneButton.disabled = false;
+            getFortuneButton.style.opacity = 1;
+          }
+        }
+
+        printLine();
+
+        lastFortune = data.spread;
 
         if (lastFortune && lastFortune.trim() !== "") {
           document.getElementById('aiButton').style.display = "inline";
@@ -77,26 +116,57 @@
       });
     }
 
-
-    // Отримати AI інтерпретацію
     function getAIHelp() {
-        if (!lastFortune) return;
+      if (!lastFortune) return;
 
-        fetch('http://127.0.0.1:5000/ai', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ spreadText: lastFortune })  // передаємо текст розкладу
-        })
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('ai').innerText = data.ai;
-        })
-        .catch(err => {
-          console.error(err);
-          document.getElementById('ai').innerText = 'Error getting AI help.';
-        });
+      const aiButton = document.getElementById('aiButton');
+      aiButton.disabled = true;
+      aiButton.style.opacity = 0.5;
+
+      fetch('http://209.38.254.164:5000/ai', { //http://209.38.254.164:5000/ai
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spreadText: lastFortune })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const aiEl = document.getElementById('ai');
+        aiEl.innerHTML = "";
+        const text = data.ai;
+        let i = 0;
+
+        function typeChar() {
+          if (i < text.length) {
+            const char = text[i] === " " ? "&nbsp;" : (text[i] === "\n" ? "<br />" : text[i]);
+            aiEl.innerHTML += char;
+            i++;
+            setTimeout(typeChar, 10);
+          } else {
+            aiButton.disabled = false;
+            aiButton.style.opacity = 1;
+          }
+        }
+        typeChar();
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('ai').innerText = 'Error getting AI help.';
+      });
+    }
+
+    function checkSpreadSelection() {
+      const select = document.getElementById('spreadSelect');
+      const selectedId = parseInt(select.value);
+      const customTextDiv = document.getElementById('customText');
+
+      if (selectedId === -1) {
+        customTextDiv.style.display = 'block';
+      } else {
+        customTextDiv.style.display = 'none';
       }
+    }
   </script>
+
 
 </body>
 </html>

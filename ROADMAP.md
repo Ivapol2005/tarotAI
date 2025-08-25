@@ -49,9 +49,9 @@ An open-source playground for Tarot enthusiasts, developers, and data nerds. We 
 ### 🌐 Phase 1: Web UI (v0.2)
 **Goal**: User-friendly browser access
 
-- [ ] Tech stack:
-    - [ ] Frontend: Streamlit (fast prototype) → Next.js (production) ~~asked AI. don't know how to do frontend yet~~
-    - [ ] Hosting
+- [X] Tech stack:
+    - [X] Frontend: Streamlit (fast prototype) → Next.js (production) ~~asked AI. don't know how to do frontend yet~~
+    - [X] Hosting
 
 - [ ] Features:
     - [ ] Card selection visualizer

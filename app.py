@@ -10,9 +10,14 @@ CORS(app)
 def run():
     data = request.get_json()
     spread_id = data.get('spreadID', 0)
-    result = tarotAI_functions.tell(spreadID=spread_id)
 
-    spread_str = str(result)  # result — це Spread обʼєкт
+    if spread_id == -1:
+        custom_text = data.get('customText', "")
+        result = tarotAI_functions.tell(spreadID=spread_id, customText=custom_text)
+    else:
+        result = tarotAI_functions.tell(spreadID=spread_id)
+
+    spread_str = str(result)
     ai_result = ""
 
     return jsonify({
@@ -31,4 +36,4 @@ def ai():
     return jsonify({'ai': ai_result})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

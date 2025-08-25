@@ -6,12 +6,15 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
 
+http://209.38.254.164:8000/frontend/fortune.html?
+
 # tarotAI
 Open-Source Tarot Readings Powered by LLM
 
 ## Installation
+You don't have to install anything. You may use app remotely with the internet.
 
-To install and run the tarotAI application on your PC, you will need to follow these steps. This guide assumes you have Python and Git installed.
+However to install and run the tarotAI application on your PC, you will need to follow these steps. This guide assumes you have Python and Git installed.
 If not:
  - install Python (preferably the latest version): https://www.python.org/downloads/
  - install git: https://git-scm.com/downloads
