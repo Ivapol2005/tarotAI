@@ -38,7 +38,7 @@
     let lastFortune = "";
 
     // load from json
-    fetch('/data/spreads.json')
+    fetch('/tarotAI/data/spreads.json')
       .then(response => response.json())
       .then(data => {
         spreads = data.spreads;
