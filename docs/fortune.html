@@ -38,7 +38,7 @@
     let lastFortune = "";
 
     // load from json
-    fetch('../tarotai/data/spreads.json')
+    fetch('/data/spreads.json')
       .then(response => response.json())
       .then(data => {
         spreads = data.spreads;
