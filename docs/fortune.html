@@ -75,7 +75,7 @@
         requestBody.customText = customText;
       }
 
-      fetch('http://209.38.254.164:5000/run', {
+      fetch('https://tarotai-ivapol2005.website/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
@@ -123,7 +123,7 @@
       aiButton.disabled = true;
       aiButton.style.opacity = 0.5;
 
-      fetch('http://209.38.254.164:5000/ai', { //http://209.38.254.164:5000/ai
+      fetch('https://tarotai-ivapol2005.website/ai', { //http://209.38.254.164:5000/ai
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spreadText: lastFortune })
